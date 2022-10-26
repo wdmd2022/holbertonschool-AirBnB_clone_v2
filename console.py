@@ -124,7 +124,6 @@ class HBNBCommand(cmd.Cmd):
             return
 
         new_instance = HBNBCommand.classes[args_list[0]]()
-        storage.save()
         for param in args_list[1:]:
             if '=' in param:
                 temp_list = param.split('=', 1)
@@ -141,6 +140,7 @@ class HBNBCommand(cmd.Cmd):
                     attr_v = int(attr_v)
                     setattr(new_instance, attr_n, attr_v)
         print(new_instance.id)
+        storage.new(self)
         storage.save()
 
     def help_create(self):
