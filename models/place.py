@@ -7,7 +7,7 @@ from models.user import User
 from models.review import Review
 import os
 from sqlalchemy import Column, Float, String, ForeignKey, Integer
-from sqlalchemy.orm import relationship
+from sqlalchemy.orm import relationship, backref
 
 
 class Place(BaseModel, Base):
