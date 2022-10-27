@@ -1,7 +1,7 @@
 #!/usr/bin/python3
 """This module defines a class User"""
 from models.base_model import BaseModel, Base
-from os import getenv
+import os
 from sqlalchemy import Column, String
 
 
