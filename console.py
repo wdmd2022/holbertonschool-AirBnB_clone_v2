@@ -132,7 +132,7 @@ class HBNBCommand(cmd.Cmd):
                 attr_v = temp_list[1]
                 if '\"' in attr_v:
                     attr_v = attr_v[1:-1]
-                    attr_v =attr_v.replace("_", " ")
+                    attr_v = attr_v.replace("_", " ")
                     setattr(new_instance, attr_n, attr_v)
                 elif '.' in attr_v:
                     attr_v = float(attr_v)
@@ -217,17 +217,16 @@ class HBNBCommand(cmd.Cmd):
     def do_all(self, args):
         """ Shows all objects, or all objects of a class"""
         print_list = []
-
         if args:
             args = args.split(' ')[0]  # remove possible trailing args
             if args not in HBNBCommand.classes:
                 print("** class doesn't exist **")
                 return
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all(args).items():
                 if k.split('.')[0] == args:
                     print_list.append(str(v))
         else:
-            for k, v in storage._FileStorage__objects.items():
+            for k, v in storage.all():
                 print_list.append(str(v))
 
         print(print_list)

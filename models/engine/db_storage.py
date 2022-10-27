@@ -33,23 +33,24 @@ class DBStorage:
         if env == "test":
             Base.metadata.dropall(self.__engine)
 
-    def all(self, cls=None):
+    def all(self, given_cls=None):
         """
         Query on current database session objects depending on class name
         """
         query_dict = {}
-        cls_dict = {}
-        classes = {User, State, City, Amenity, Place, Review}
-        if cls in classes:
-            cls_dict = self.__session.query(cls).all()
+        classes = {'State': State, 'City': City}
+        if given_cls in classes.keys():
+            for obj in self.__session.query(classes[given_cls]).all():
+                query_dict.update({"{}.{}".format(obj.__class__.__name__,
+                                                  obj.id): obj})
+                print(query_dict["{}.{}".format(obj.__class__.__name__,
+                                                  obj.id)])
 
-        if cls is None:
+        if given_cls is None:
             for cls_name in classes:
-                cls_dict.update(self.__session.query(cls_name).all())
-
-        for obj in cls_dict:
-            key = obj.__class__.__name__ + obj.id
-            query_dict[key] = obj
+                for obj in self.__session.query(cls_name).all():
+                    query_dict.update({"{}.{}".format(obj.__class__.__name__,
+                                       obj.id): obj})
 
         return query_dict
 
