@@ -3,10 +3,9 @@
 from models.base_model import BaseModel, Base
 from os import getenv
 from sqlalchemy import Column, String
-from sqlalchemy.orm import relationship, backref
 
 
-class User(BaseModel):
+class User(BaseModel, Base):
     """This class defines a user by various attributes"""
     if os.getenv('HBNB_TYPE_STORAGE') == 'db':
         __tablename__ = 'users'
