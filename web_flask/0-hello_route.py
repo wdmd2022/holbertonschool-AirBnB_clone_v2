@@ -3,11 +3,14 @@
 Script that start a Flask application listening on 0.0.0.0:5000
 Route / Hello HBNB!
 """
+
+
 from flask import Flask
 app = Flask(__name__)
 app.url_map.strict_slashes = False
-@app.route('/')
 
+
+@app.route('/')
 def home():
     """ prints Hello HBNB! """
     return ("Hello HBNB!")
