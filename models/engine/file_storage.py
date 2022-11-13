@@ -62,3 +62,6 @@ class FileStorage:
             quay = "{}.{}".format(obj.__class__.__name__, obj.id)
             if quay in self.__objects:
                 del self.__objects[quay]
+
+    def close(self):
+        self.reload()
