@@ -44,7 +44,7 @@ class DBStorage:
                 query_dict.update({"{}.{}".format(obj.__class__.__name__,
                                                   obj.id): obj})
                 print(query_dict["{}.{}".format(obj.__class__.__name__,
-                                                  obj.id)])
+                                                obj.id)])
 
         if given_cls is None:
             for cls_name in classes:
@@ -78,4 +78,4 @@ class DBStorage:
             self.__session.delete(obj)
 
     def close(self):
-        self.__session.remove()
+        self.__session.close()
