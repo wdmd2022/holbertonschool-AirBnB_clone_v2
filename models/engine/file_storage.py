@@ -18,7 +18,7 @@ class FileStorage:
             for value in self.__objects.values():
                 if type(value) == clas:
                     llcooldict.update({value.to_dict()['__class__'] +
-                                        '.' + value.id: value})
+                                       '.' + value.id: value})
             return llcooldict
 
     def new(self, obj):
@@ -66,4 +66,5 @@ class FileStorage:
                 del self.__objects[quay]
 
     def close(self):
+        """ calls reload """
         self.reload()
