@@ -8,15 +8,17 @@ class FileStorage:
     __file_path = 'file.json'
     __objects = {}
 
-    def all(self, cls=None):
+    def all(self, clas=None):
         """Returns a dictionary of models currently in storage"""
-        if cls is None:
+
+        if clas is None:
             return FileStorage.__objects
         else:
             llcooldict = {}
-            for key, value in self.__objects.items():
-                if value.__class__ == cls or value.__class__.__name__ == cls:
-                    llcooldict[key] = value
+            for value in self.__objects.values():
+                if type(value) == clas:
+                    llcooldict.update({value.to_dict()['__class__'] +
+                                        '.' + value.id: value})
             return llcooldict
 
     def new(self, obj):

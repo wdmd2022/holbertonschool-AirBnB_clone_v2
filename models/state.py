@@ -2,7 +2,7 @@
 """ State Module for HBNB project """
 from models.base_model import BaseModel, Base
 from models.city import City
-from models.engine.file_storage import FileStorage
+from models import storage
 from sqlalchemy import Column, String, ForeignKey
 from sqlalchemy.orm import relationship
 import os
@@ -24,8 +24,8 @@ class State(BaseModel, Base):
             equal to the current State.id -> it will be the FileStorage
             relationship between State and City"""
             instanceslist = []
-            allcitiesdict = FileStorage.all(City)
-            for place in allcitiesdict.values():
-                if place.state_id == self.id:
-                    instanceslist.append(place)
+            allcitiesdict = storage.all(City)
+            for cty in allcitiesdict.values():
+                if cty.state_id == self.id:
+                    instanceslist.append(cty)
             return instanceslist
