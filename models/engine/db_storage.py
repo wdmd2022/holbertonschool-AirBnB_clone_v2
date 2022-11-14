@@ -38,16 +38,20 @@ class DBStorage:
         Query on current database session objects depending on class name
         """
         query_dict = {}
-        if given_cls is not None:
-            for obj in self.__session.query(given_cls).all():
-                name_and_id = "{}.{}".format(type(obj).__name__, obj.id)
-                query_dict.update({"{}".format(name_and_id): obj})
+        classes = {'State': State, 'City': City}
+        if given_cls in classes.keys():
+            for obj in self.__session.query(classes[given_cls]).all():
+                query_dict.update({"{}.{}".format(obj.__class__.__name__,
+                                                  obj.id): obj})
+                print(query_dict["{}.{}".format(obj.__class__.__name__,
+                                                  obj.id)])
 
-        else:
+        if given_cls is None:
             for cls_name in classes:
                 for obj in self.__session.query(cls_name).all():
-                    name_and_id = "{}.{}".format(type(obj).__name__, obj.id)
-                    query_dict.update({"{}".format(name_and_id): obj})
+                    query_dict.update({"{}.{}".format(obj.__class__.__name__,
+                                       obj.id): obj})
+
         return query_dict
 
     def reload(self):
@@ -72,8 +76,3 @@ class DBStorage:
         """ delete from the current database session obj if not None """
         if obj is not None:
             self.__session.delete(obj)
-
-    def close(self):
-        """ close a session, then call reload """
-        self.__session.close()
-        self.reload()
