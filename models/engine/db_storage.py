@@ -12,6 +12,8 @@ from models.amenity import Amenity
 from models.place import Place
 from models.review import Review
 
+classes = {'State': State, 'City': City}
+
 
 class DBStorage:
     """ blank """
@@ -38,7 +40,6 @@ class DBStorage:
         Query on current database session objects depending on class name
         """
         query_dict = {}
-        classes = {'State': State, 'City': City}
         if given_cls is not None:
             for obj in self.__session.query(given_cls).all():
                 name_and_id = "{}.{}".format(type(obj).__name__, obj.id)
