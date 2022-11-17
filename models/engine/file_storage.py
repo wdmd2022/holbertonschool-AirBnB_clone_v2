@@ -14,9 +14,10 @@ class FileStorage:
             return FileStorage.__objects
         else:
             llcooldict = {}
-            for key, value in self.__objects.items():
-                if value.__class__ == cls or value.__class__.__name__ == cls:
-                    llcooldict[key] = value
+            for value in self.__objects.values():
+                if type(value) == cls:
+                    llcooldict.update({value.to_dict()['__class__'] +
+                                       '.' + value.id: value})
             return llcooldict
 
     def new(self, obj):
