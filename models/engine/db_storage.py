@@ -77,4 +77,4 @@ class DBStorage:
 
     def close(self):
         """remove dunder session private attribute"""
-        self.__session.
+        self.__session.close()
