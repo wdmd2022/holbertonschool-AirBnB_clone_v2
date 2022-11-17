@@ -61,7 +61,7 @@ def number_odd_or_even(n):
 def list_the_states():
     """this function returns a rendered HTML page of states"""
     states = storage.all(State)
-    return render_template('7-states_list.html', sorted_states=states)
+    return render_template('7-states_list.html', the_states=states)
 
 
 @app.teardown_appcontext
