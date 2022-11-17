@@ -18,7 +18,7 @@ class State(BaseModel, Base):
         cities = relationship("City", backref="state",
                               cascade="all, delete, delete-orphan")
 
-    if os.getenv('HBNB_TYPE_STORAGE') == 'fs':
+    else:
         @property
         def cities(self):
             """getter attribute returns list of City instances w/ state_id
